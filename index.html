@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Wali Murid - SDN 2 Karangmangu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            max-height: 800px;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: zoomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-circle {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            padding: 8px;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-circle i {
+            font-size: 45px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .school-title {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portal-subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-form {
+            padding: 35px 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group-custom {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 18px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px 15px 15px 48px;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn-submit:hover::after {
+            width: 400px;
+            height: 400px;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.97);
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Dashboard Screen */
+        .dashboard-screen {
+            display: none;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            height: 100%;
+            flex-direction: column;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 25px 50px;
+            position: relative;
+        }
+
+        .welcome-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome-text {
+            color: white;
+        }
+
+        .welcome-greet {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .welcome-name {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .dashboard-content {
+            margin-top: -30px;
+            padding: 25px 20px 25px;
+            flex: 1;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .menu-section {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        .menu-items {
+            display: grid;
+            gap: 12px;
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .menu-item:hover {
+            transform: translateX(5px);
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .menu-item:active {
+            transform: scale(0.98);
+        }
+
+        .menu-icon-box {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .menu-item:nth-child(1) .menu-icon-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .menu-item:nth-child(2) .menu-icon-box {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .menu-details {
+            flex: 1;
+        }
+
+        .menu-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .menu-description {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .menu-arrow {
+            color: #9ca3af;
+            font-size: 20px;
+        }
+
+        .logout-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+
+        /* App View */
+        .app-screen {
+            display: none;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            height: 100%;
+            flex-direction: column;
+            animation: slideLeft 0.4s ease-out;
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .app-topbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            color: white;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateX(-4px);
+        }
+
+        .app-name {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .app-container-view {
+            flex: 1;
+            position: relative;
+            background: #f8f9fa;
+        }
+
+        .app-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .app-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        .loader-text {
+            color: #6b7280;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Toast Notification */
+        .toast-area {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 9999;
+        }
+
+        .toast-msg {
+            background: white;
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 280px;
+            animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        .toast-success {
+            border-left: 5px solid #10b981;
+        }
+
+        .toast-error {
+            border-left: 5px solid #ef4444;
+        }
+
+        .toast-icon-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .toast-success .toast-icon-circle {
+            background: #d1fae5;
+            color: #10b981;
+        }
+
+        .toast-error .toast-icon-circle {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .toast-content {
+            flex: 1;
+        }
+
+        .toast-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="login-screen">
+            <div class="login-header">
+                <div class="logo-circle">
+                    <!-- Ganti URL di bawah dengan link logo sekolah Anda -->
+                    <img src="https://via.placeholder.com/80/667eea/ffffff?text=LOGO" alt="Logo SDN 2 Karangmangu" id="schoolLogo">
+                    <!-- Atau bisa tetap pakai icon jika tidak ada gambar -->
+                    <!-- <i class="bi bi-building"></i> -->
+                </div>
+                <div class="school-title">SDN 2 Karangmangu</div>
+                <div class="portal-subtitle">Portal Wali Murid</div>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="input-group-custom">
+                    <label class="input-label">Username</label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-person-fill input-icon"></i>
+                        <input type="text" class="input-field" id="username" placeholder="Masukkan username Anda" required>
+                    </div>
+                </div>
+                <div class="input-group-custom">
+                    <label class="input-label">Password</label>
+                    <div class="input-wrapper">
+                        <i class="bi bi-lock-fill input-icon"></i>
+                        <input type="password" class="input-field" id="password" placeholder="Masukkan password Anda" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <span id="btnText">Masuk ke Portal</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+            </form>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div id="dashboardScreen" class="dashboard-screen">
+            <div class="dashboard-header">
+                <div class="welcome-section">
+                    <div class="avatar" id="userAvatar">W</div>
+                    <div class="welcome-text">
+                        <div class="welcome-greet">Selamat datang,</div>
+                        <div class="welcome-name" id="userName">Wali Murid</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-content">
+                <div class="menu-section">
+                    <div class="section-title">
+                        <i class="bi bi-grid-3x3-gap-fill"></i>
+                        Menu Utama
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item" onclick="openApplication('monitoring-siswa', 'Monitoring Siswa')">
+                            <div class="menu-icon-box">
+                                <i class="bi bi-person-check-fill"></i>
+                            </div>
+                            <div class="menu-details">
+                                <div class="menu-name">Monitoring Siswa</div>
+                                <div class="menu-description">Pantau kehadiran dan aktivitas harian</div>
+                            </div>
+                            <i class="bi bi-chevron-right menu-arrow"></i>
+                        </div>
+                        <div class="menu-item" onclick="openApplication('monitor-nilai', 'Monitoring Nilai')">
+                            <div class="menu-icon-box">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+                            <div class="menu-details">
+                                <div class="menu-name">Monitoring Nilai</div>
+                                <div class="menu-description">Lihat nilai dan rapor akademik</div>
+                            </div>
+                            <i class="bi bi-chevron-right menu-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="logout-section">
+                    <button class="btn-logout" onclick="handleLogout()">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Keluar dari Portal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- App Screen -->
+        <div id="appScreen" class="app-screen">
+            <div class="app-topbar">
+                <button class="btn-back" onclick="backToDashboard()">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <div class="app-name" id="appName">Aplikasi</div>
+            </div>
+            <div class="app-container-view">
+                <div class="app-loader" id="appLoader">
+                    <div class="loader-spinner"></div>
+                    <div class="loader-text">Memuat aplikasi...</div>
+                </div>
+                <iframe class="app-frame" id="appFrame" style="display: none;" onload="frameLoaded()"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Area -->
+    <div class="toast-area" id="toastArea"></div>
+
+    <script>
+        const users = {
+            'wali1': { password: '123456', name: 'Wali Murid Kelas 1' },
+            'wali2': { password: '123456', name: 'Wali Murid Kelas 2' },
+            'wali3a': { password: '123456', name: 'Wali Murid Kelas 3A' },
+            'wali3b': { password: '123456', name: 'Wali Murid Kelas 3b' },
+            'wali4a': { password: '123456', name: 'Wali Murid Kelas 4a' },
+            'wali4b': { password: '123456', name: 'Wali Murid Kelas 4b' },
+            'wali5': { password: '123456', name: 'Wali Murid Kelas 5' },
+            'wali6': { password: '123456', name: 'Wali Murid Kelas 6' },
+            'admin': { password: 'admin123', name: 'Administrator' }
+        };
+
+        const apps = {
+            'monitoring-siswa': 'https://sdn2karangmangu.github.io/monitoring-siswa/',
+            'monitor-nilai': 'https://sdn2karangmangu.github.io/monitor-nilai/'
+        };
+
+        const elements = {
+            loginScreen: document.getElementById('loginScreen'),
+            dashboardScreen: document.getElementById('dashboardScreen'),
+            appScreen: document.getElementById('appScreen'),
+            loginForm: document.getElementById('loginForm'),
+            username: document.getElementById('username'),
+            password: document.getElementById('password'),
+            btnText: document.getElementById('btnText'),
+            spinner: document.getElementById('spinner'),
+            userName: document.getElementById('userName'),
+            userAvatar: document.getElementById('userAvatar'),
+            appName: document.getElementById('appName'),
+            appLoader: document.getElementById('appLoader'),
+            appFrame: document.getElementById('appFrame')
+        };
+
+        elements.loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const user = elements.username.value.trim();
+            const pass = elements.password.value;
+            
+            elements.btnText.style.display = 'none';
+            elements.spinner.style.display = 'block';
+            
+            await new Promise(r => setTimeout(r, 600));
+            
+            if (users[user] && users[user].password === pass) {
+                showToast('Login berhasil!', 'success');
+                setTimeout(() => showDashboard(users[user].name), 300);
+            } else {
+                showToast('Username atau password salah!', 'error');
+                elements.btnText.style.display = 'inline';
+                elements.spinner.style.display = 'none';
+            }
+        });
+
+        function showDashboard(name) {
+            elements.userName.textContent = name;
+            elements.userAvatar.textContent = name.charAt(0).toUpperCase();
+            
+            elements.loginScreen.style.display = 'none';
+            elements.dashboardScreen.style.display = 'flex';
+            elements.appScreen.style.display = 'none';
+        }
+
+        function openApplication(appKey, appTitle) {
+            elements.appName.textContent = appTitle;
+            elements.dashboardScreen.style.display = 'none';
+            elements.appScreen.style.display = 'flex';
+            elements.appLoader.style.display = 'block';
+            elements.appFrame.style.display = 'none';
+            elements.appFrame.src = apps[appKey];
+        }
+
+        function backToDashboard() {
+            elements.appScreen.style.display = 'none';
+            elements.dashboardScreen.style.display = 'flex';
+            elements.appFrame.src = 'about:blank';
+        }
+
+        function frameLoaded() {
+            elements.appLoader.style.display = 'none';
+            elements.appFrame.style.display = 'block';
+        }
+
+        function handleLogout() {
+            elements.loginForm.reset();
+            elements.btnText.style.display = 'inline';
+            elements.spinner.style.display = 'none';
+            elements.appFrame.src = 'about:blank';
+            
+            elements.loginScreen.style.display = 'flex';
+            elements.dashboardScreen.style.display = 'none';
+            elements.appScreen.style.display = 'none';
+            
+            showToast('Berhasil keluar dari portal', 'success');
+        }
+
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `toast-msg toast-${type}`;
+            
+            const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill';
+            
+            toast.innerHTML = `
+                <div class="toast-icon-circle">
+                    <i class="bi ${icon}"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">${message}</div>
+                </div>
+            `;
+            
+            document.getElementById('toastArea').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'toastIn 0.3s ease-out reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 2800);
+        }
+
+        window.addEventListener('popstate', () => {
+            if (elements.appScreen.style.display === 'flex') {
+                backToDashboard();
+                history.pushState(null, null, location.href);
+            }
+        });
+    </script>
+</body>
+</html>
