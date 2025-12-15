@@ -2,7 +2,9 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Portal Wali Murid - SDN 2 Karangmangu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -11,6 +13,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -20,9 +23,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 10px;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
         }
 
         /* Animated background */
@@ -42,11 +48,12 @@
 
         .app-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             height: 100vh;
-            max-height: 800px;
+            max-height: 100vh;
             position: relative;
             z-index: 1;
+            margin: 0 auto;
         }
 
         /* Login Screen */
@@ -647,6 +654,43 @@
             font-size: 14px;
             color: #1f2937;
         }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .app-container {
+                max-width: 100%;
+            }
+            
+            .login-form {
+                padding: 25px 20px;
+            }
+            
+            .dashboard-content {
+                padding: 20px 15px;
+            }
+            
+            .menu-item {
+                padding: 15px;
+            }
+            
+            .menu-icon-box {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
+            
+            .menu-name {
+                font-size: 15px;
+            }
+            
+            .menu-description {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -766,6 +810,29 @@
     <div class="toast-area" id="toastArea"></div>
 
     <script>
+        // Detect mobile device and adjust viewport
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Fix viewport for mobile devices
+        if (isMobile()) {
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+            }
+        }
+
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
         const users = {
             'wali1': { password: '123456', name: 'Wali Murid Kelas 1' },
             'wali2': { password: '123456', name: 'Wali Murid Kelas 2' },
