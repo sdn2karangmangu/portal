@@ -516,6 +516,9 @@
         .menu-item:nth-child(3) .menu-icon-box {
             background: linear-gradient(135deg, #4facfe, #00f2fe);
         }
+         .menu-item:nth-child(4) .menu-icon-box {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
 
         .menu-details {
             flex: 1;
@@ -856,6 +859,16 @@
                             </div>
                             <i class="bi bi-chevron-right menu-arrow"></i>
                         </div>
+                         <div class="menu-item" onclick="openApplication('chat', 'Chat')">
+                            <div class="menu-icon-box">
+                                <i class="bi bi-chat-dots-fill"></i>
+                            </div>
+                            <div class="menu-details">
+                                <div class="menu-name">Media Sosial Sekolah</div>
+                                <div class="menu-description">Dapatkan informasi, coment dan Chat</div>
+                            </div>
+                            <i class="bi bi-chevron-right menu-arrow"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="logout-section">
@@ -927,7 +940,8 @@
         const apps = {
             'monitoring-siswa': 'https://sdn2karangmangu.github.io/monitoring-siswa/',
             'monitor-nilai': 'https://sdn2karangmangu.github.io/monitor-nilai/',
-            'monitor-rekap': 'https://sdn2karangmangu.github.io/rekap-nilai/'
+            'monitor-rekap': 'https://sdn2karangmangu.github.io/rekap-nilai/',
+            'chat': 'https://sdn2karangmangu.github.io/chat/'
         };
 
         const elements = {
