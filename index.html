@@ -44,18 +44,20 @@
             --radius-lg: 28px;
         }
 
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-cream);
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 0;
             position: relative;
-            overflow: hidden;
             width: 100%;
-            height: 100vh;
             margin: 0;
         }
 
@@ -101,8 +103,7 @@
         .app-container {
             width: 100%;
             max-width: 500px;
-            height: 100vh;
-            max-height: 100vh;
+            height: 100%;
             position: relative;
             z-index: 1;
             margin: 0 auto;
@@ -128,10 +129,11 @@
 
         .login-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            padding: 45px 30px 60px;
+            padding: 40px 25px 50px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         /* Decorative wave */
@@ -141,7 +143,7 @@
             bottom: -1px;
             left: 0;
             width: 100%;
-            height: 50px;
+            height: 40px;
             background: var(--white);
             clip-path: ellipse(60% 100% at 50% 100%);
         }
@@ -165,17 +167,17 @@
         }
 
         .logo-badge {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 0 4px rgba(255,255,255,0.2);
             position: relative;
-            padding: 12px;
+            padding: 10px;
             transition: transform 0.3s ease;
         }
 
@@ -190,17 +192,17 @@
         }
 
         .logo-badge i {
-            font-size: 48px;
+            font-size: 40px;
             color: var(--primary);
         }
 
         /* Decorative ring around logo */
         .logo-ring {
             position: absolute;
-            top: -8px;
-            left: -8px;
-            right: -8px;
-            bottom: -8px;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
             border: 2px dashed rgba(255,255,255,0.3);
             border-radius: 50%;
             animation: spin 20s linear infinite;
@@ -213,9 +215,9 @@
 
         .school-title {
             color: var(--white);
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             position: relative;
             z-index: 1;
             letter-spacing: -0.5px;
@@ -223,42 +225,45 @@
 
         .portal-subtitle {
             color: rgba(255,255,255,0.9);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             position: relative;
             z-index: 1;
             background: rgba(255,255,255,0.15);
             display: inline-block;
-            padding: 6px 18px;
+            padding: 5px 14px;
             border-radius: 20px;
             backdrop-filter: blur(5px);
         }
 
         .login-form {
-            padding: 0 28px 35px;
+            padding: 0 24px 16px;
             flex: 1;
             display: flex;
             flex-direction: column;
             position: relative;
             background: var(--white);
+            overflow-y: auto;
+            min-height: 0;
         }
 
         .login-form-container {
             background: var(--bg-cream);
             border-radius: var(--radius-md);
-            padding: 28px;
+            padding: 24px;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(0,0,0,0.04);
             position: relative;
             z-index: 1;
-            margin-top: -10px;
+            margin-top: -8px;
+            flex-shrink: 0;
         }
 
         .login-title {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 22px;
             color: var(--text-dark);
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             position: relative;
             display: flex;
@@ -269,7 +274,7 @@
 
         .login-title i {
             color: var(--secondary);
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .login-title::after {
@@ -285,16 +290,16 @@
         }
 
         .input-group-custom {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             position: relative;
         }
 
         .input-label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             transition: color 0.3s ease;
             display: flex;
             align-items: center;
@@ -303,7 +308,7 @@
 
         .input-label i {
             color: var(--primary-light);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .input-wrapper {
@@ -312,10 +317,10 @@
 
         .input-field {
             width: 100%;
-            padding: 14px 16px 14px 48px;
+            padding: 12px 42px 12px 44px;
             border: 2px solid #e8e4dc;
             border-radius: var(--radius-sm);
-            font-size: 15px;
+            font-size: 14px;
             font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
             background: var(--white);
@@ -324,7 +329,7 @@
 
         .input-field::placeholder {
             color: #b8b4ac;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .input-field:focus {
@@ -335,11 +340,11 @@
 
         .input-icon {
             position: absolute;
-            left: 16px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: #b8b4ac;
-            font-size: 18px;
+            font-size: 16px;
             transition: all 0.3s ease;
             z-index: 2;
         }
@@ -355,13 +360,13 @@
         /* Password toggle */
         .password-toggle {
             position: absolute;
-            right: 14px;
+            right: 12px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
             color: #b8b4ac;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             padding: 4px;
             z-index: 2;
@@ -377,13 +382,13 @@
             color: var(--white);
             border: none;
             border-radius: var(--radius-sm);
-            padding: 16px;
-            font-size: 15px;
+            padding: 14px;
+            font-size: 14px;
             font-weight: 700;
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin-top: 8px;
             position: relative;
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(26, 95, 122, 0.3);
@@ -392,6 +397,7 @@
             justify-content: center;
             gap: 8px;
             letter-spacing: 0.5px;
+            width: 100%;
         }
 
         .btn-submit::before {
@@ -420,8 +426,8 @@
 
         .spinner {
             display: none;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 3px solid rgba(255,255,255,0.3);
             border-top-color: var(--white);
             border-radius: 50%;
@@ -434,21 +440,37 @@
 
         .login-footer {
             text-align: center;
-            margin-top: auto;
-            padding-top: 20px;
+            padding: 12px 20px 16px;
+            background: linear-gradient(to top, rgba(26,95,122,0.04), transparent);
+            border-top: 1px solid rgba(0,0,0,0.04);
+            flex-shrink: 0;
         }
 
         .login-footer-text {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
         .login-footer-text i {
             color: var(--secondary);
+        }
+
+        .login-footer-divider {
+            width: 4px;
+            height: 4px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .login-footer-brand {
+            color: var(--primary);
+            font-weight: 600;
         }
 
         /* ========== DASHBOARD SCREEN ========== */
@@ -470,8 +492,9 @@
 
         .dashboard-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            padding: 30px 25px 55px;
+            padding: 24px 20px 45px;
             position: relative;
+            flex-shrink: 0;
         }
 
         .dashboard-header::after {
@@ -480,7 +503,7 @@
             bottom: -1px;
             left: 0;
             width: 100%;
-            height: 40px;
+            height: 35px;
             background: var(--bg-cream);
             clip-path: ellipse(60% 100% at 50% 100%);
         }
@@ -489,7 +512,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             position: relative;
             z-index: 1;
         }
@@ -497,10 +520,10 @@
         .header-badge {
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
             color: var(--white);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -508,39 +531,40 @@
         }
 
         .header-badge i {
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .welcome-section {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             position: relative;
             z-index: 1;
         }
 
         .avatar {
-            width: 58px;
-            height: 58px;
+            width: 50px;
+            height: 50px;
             background: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--primary);
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             position: relative;
             border: 3px solid rgba(255,255,255,0.3);
+            flex-shrink: 0;
         }
 
         .avatar-status {
             position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 14px;
-            height: 14px;
+            bottom: 1px;
+            right: 1px;
+            width: 12px;
+            height: 12px;
             background: var(--success);
             border: 2px solid var(--white);
             border-radius: 50%;
@@ -548,42 +572,47 @@
 
         .welcome-text {
             color: var(--white);
+            min-width: 0;
         }
 
         .welcome-greet {
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.85;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
             font-weight: 400;
         }
 
         .welcome-name {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             letter-spacing: -0.3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .dashboard-content {
-            margin-top: -25px;
-            padding: 0 20px 20px;
+            margin-top: -20px;
+            padding: 0 16px 16px;
             flex: 1;
             overflow-y: auto;
             position: relative;
             z-index: 1;
+            min-height: 0;
         }
 
         /* Quick Stats */
         .quick-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
         .stat-card {
             background: var(--white);
             border-radius: var(--radius-sm);
-            padding: 14px 8px;
+            padding: 12px 6px;
             text-align: center;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(0,0,0,0.03);
@@ -595,14 +624,14 @@
         }
 
         .stat-icon {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 8px;
-            font-size: 16px;
+            margin: 0 auto 6px;
+            font-size: 14px;
         }
 
         .stat-icon.blue { background: rgba(26, 95, 122, 0.1); color: var(--primary); }
@@ -610,16 +639,16 @@
         .stat-icon.green { background: rgba(39, 174, 96, 0.1); color: var(--success); }
 
         .stat-value {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--text-dark);
             line-height: 1;
         }
 
         .stat-label {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 3px;
             font-weight: 500;
         }
 
@@ -627,47 +656,47 @@
         .menu-section {
             background: var(--white);
             border-radius: var(--radius-md);
-            padding: 22px;
+            padding: 18px;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(0,0,0,0.03);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .section-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .section-title i {
             color: var(--secondary);
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .section-title span {
             color: var(--text-muted);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 500;
             margin-left: auto;
         }
 
         .menu-items {
             display: grid;
-            gap: 12px;
+            gap: 10px;
         }
 
         .menu-item {
             background: var(--bg-cream);
             border: 2px solid transparent;
             border-radius: var(--radius-sm);
-            padding: 16px;
+            padding: 14px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
@@ -702,13 +731,13 @@
         }
 
         .menu-icon-box {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 20px;
             color: var(--white);
             flex-shrink: 0;
             position: relative;
@@ -736,14 +765,14 @@
         }
 
         .menu-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .menu-description {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             line-height: 1.4;
             white-space: nowrap;
@@ -753,8 +782,9 @@
 
         .menu-arrow {
             color: #d1cdc5;
-            font-size: 18px;
+            font-size: 16px;
             transition: all 0.3s;
+            flex-shrink: 0;
         }
 
         .menu-item:hover .menu-arrow {
@@ -766,39 +796,42 @@
         .info-card {
             background: linear-gradient(135deg, rgba(26, 95, 122, 0.05), rgba(232, 185, 35, 0.05));
             border-radius: var(--radius-sm);
-            padding: 16px;
-            margin-bottom: 16px;
+            padding: 14px;
+            margin-bottom: 12px;
             border: 1px dashed rgba(26, 95, 122, 0.15);
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 10px;
         }
 
         .info-card i {
             color: var(--secondary);
-            font-size: 20px;
+            font-size: 18px;
             margin-top: 2px;
+            flex-shrink: 0;
         }
 
         .info-card-content {
             flex: 1;
+            min-width: 0;
         }
 
         .info-card-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .info-card-text {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             line-height: 1.5;
         }
 
         .logout-section {
-            margin-top: 8px;
+            margin-top: 4px;
+            margin-bottom: 8px;
         }
 
         .btn-logout {
@@ -807,8 +840,8 @@
             color: var(--accent);
             border: 2px solid rgba(231, 76, 60, 0.15);
             border-radius: var(--radius-sm);
-            padding: 14px;
-            font-size: 14px;
+            padding: 12px;
+            font-size: 13px;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
@@ -824,6 +857,43 @@
             color: var(--white);
             border-color: var(--accent);
             box-shadow: 0 6px 20px rgba(231, 76, 60, 0.25);
+        }
+
+        /* Dashboard Footer */
+        .dashboard-footer {
+            text-align: center;
+            padding: 10px 16px 14px;
+            background: linear-gradient(to top, rgba(26,95,122,0.04), transparent);
+            border-top: 1px solid rgba(0,0,0,0.04);
+            flex-shrink: 0;
+        }
+
+        .dashboard-footer-text {
+            font-size: 10px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-footer-text i {
+            color: var(--secondary);
+            font-size: 10px;
+        }
+
+        .dashboard-footer-divider {
+            width: 3px;
+            height: 3px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .dashboard-footer-brand {
+            color: var(--primary);
+            font-weight: 600;
         }
 
         /* ========== APP SCREEN ========== */
@@ -845,11 +915,12 @@
 
         .app-topbar {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            padding: 16px 20px;
+            padding: 14px 18px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             position: relative;
+            flex-shrink: 0;
         }
 
         .app-topbar::after {
@@ -858,7 +929,7 @@
             bottom: -1px;
             left: 0;
             width: 100%;
-            height: 20px;
+            height: 15px;
             background: var(--bg-cream);
             clip-path: ellipse(60% 100% at 50% 100%);
         }
@@ -866,17 +937,18 @@
         .btn-back {
             background: rgba(255,255,255,0.15);
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             color: var(--white);
-            font-size: 18px;
+            font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
             backdrop-filter: blur(5px);
+            flex-shrink: 0;
         }
 
         .btn-back:hover {
@@ -886,16 +958,20 @@
 
         .app-name {
             color: var(--white);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .app-container-view {
             flex: 1;
             position: relative;
             background: var(--bg-cream);
-            margin-top: -10px;
+            margin-top: -8px;
             z-index: 1;
+            min-height: 0;
         }
 
         .app-frame {
@@ -913,38 +989,38 @@
         }
 
         .loader-spinner {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border: 4px solid #e8e4dc;
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spinAnim 0.8s linear infinite;
-            margin: 0 auto 15px;
+            margin: 0 auto 12px;
         }
 
         .loader-text {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
         }
 
         /* ========== TOAST ========== */
         .toast-area {
             position: fixed;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             z-index: 9999;
         }
 
         .toast-msg {
             background: var(--white);
             border-radius: var(--radius-sm);
-            padding: 16px 20px;
+            padding: 14px 18px;
             box-shadow: var(--shadow-lg);
             display: flex;
             align-items: center;
-            gap: 12px;
-            min-width: 300px;
+            gap: 10px;
+            min-width: 280px;
             animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 1px solid rgba(0,0,0,0.04);
         }
@@ -963,13 +1039,13 @@
         }
 
         .toast-icon-circle {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             flex-shrink: 0;
         }
 
@@ -989,7 +1065,7 @@
 
         .toast-title {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-dark);
         }
 
@@ -997,56 +1073,126 @@
         @media (max-width: 480px) {
             .app-container {
                 max-width: 100%;
+                border-radius: 0;
+            }
+
+            .login-screen, .dashboard-screen, .app-screen {
+                border-radius: 0;
             }
 
             .login-header {
-                padding: 35px 20px 50px;
+                padding: 30px 20px 40px;
+            }
+
+            .logo-badge {
+                width: 70px;
+                height: 70px;
+            }
+
+            .school-title {
+                font-size: 18px;
             }
 
             .login-form {
-                padding: 0 20px 25px;
+                padding: 0 18px 12px;
             }
 
             .login-form-container {
-                padding: 22px;
+                padding: 20px;
+            }
+
+            .dashboard-header {
+                padding: 20px 16px 35px;
             }
 
             .dashboard-content {
-                padding: 0 15px 15px;
+                padding: 0 14px 12px;
             }
 
             .menu-item {
-                padding: 14px;
+                padding: 12px;
             }
 
             .menu-icon-box {
-                width: 44px;
-                height: 44px;
-                font-size: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
             }
 
             .menu-name {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .menu-description {
-                font-size: 11px;
+                font-size: 10px;
             }
 
             .quick-stats {
-                gap: 8px;
+                gap: 6px;
             }
 
             .stat-card {
-                padding: 12px 6px;
+                padding: 10px 4px;
             }
 
             .stat-value {
                 font-size: 14px;
             }
+
+            .stat-label {
+                font-size: 8px;
+            }
+
+            .login-footer, .dashboard-footer {
+                padding: 10px 14px 12px;
+            }
+
+            .login-footer-text, .dashboard-footer-text {
+                font-size: 10px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-height: 700px) {
+            .login-header {
+                padding: 24px 20px 35px;
+            }
+
+            .logo-badge {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 10px;
+            }
+
+            .school-title {
+                font-size: 17px;
+            }
+
+            .portal-subtitle {
+                font-size: 11px;
+            }
+
+            .login-form-container {
+                padding: 18px;
+            }
+
+            .input-group-custom {
+                margin-bottom: 12px;
+            }
+
+            .input-field {
+                padding: 10px 38px 10px 40px;
+            }
+
+            .btn-submit {
+                padding: 12px;
+            }
+
+            .login-footer {
+                padding: 8px 14px 10px;
+            }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <!-- Floating Education Icons -->
@@ -1108,18 +1254,22 @@
                     </div>
                     <button type="submit" class="btn-submit">
                         <span id="btnText">Masuk ke Portal</span>
-                        <i class="bi bi-arrow-right-circle-fill" id="btnIcon" style="font-size:18px;"></i>
+                        <i class="bi bi-arrow-right-circle-fill" id="btnIcon" style="font-size:16px;"></i>
                         <div class="spinner" id="spinner"></div>
                     </button>
                 </div>
-
-                <div class="login-footer">
-                    <div class="login-footer-text">
-                        <i class="bi bi-shield-check"></i>
-                        Sistem Informasi Sekolah Terintegrasi
-                    </div>
-                </div>
             </form>
+
+            <div class="login-footer">
+                <div class="login-footer-text">
+                    <i class="bi bi-code-slash"></i>
+                    Dikembangkan oleh
+                    <span class="login-footer-brand">Doni Yan Ariyanto</span>
+                    <span class="login-footer-divider"></span>
+                    <i class="bi bi-house-door-fill" style="font-size:10px;"></i>
+                    Rumah Koding Rembang
+                </div>
+            </div>
         </div>
 
         <!-- Dashboard Screen -->
@@ -1230,6 +1380,17 @@
                         <i class="bi bi-box-arrow-right"></i>
                         Keluar dari Portal
                     </button>
+                </div>
+            </div>
+
+            <div class="dashboard-footer">
+                <div class="dashboard-footer-text">
+                    <i class="bi bi-code-slash"></i>
+                    Dikembangkan oleh
+                    <span class="dashboard-footer-brand">Doni Yan Ariyanto</span>
+                    <span class="dashboard-footer-divider"></span>
+                    <i class="bi bi-house-door-fill" style="font-size:9px;"></i>
+                    Rumah Koding Rembang
                 </div>
             </div>
         </div>
