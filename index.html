@@ -8,12 +8,13 @@
     <title>Portal Wali Murid - SDN 2 Karangmangu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#667eea">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Portal Wali Murid">
-<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <meta name="theme-color" content="#1a5f7a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Portal Wali Murid">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
     <style>
         * {
             margin: 0;
@@ -22,14 +23,35 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        :root {
+            --primary: #1a5f7a;
+            --primary-light: #2a8faf;
+            --primary-dark: #0d3d4f;
+            --secondary: #e8b923;
+            --secondary-light: #f5d76e;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --bg-cream: #fefcf8;
+            --bg-light: #f5f0e8;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.15);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-cream);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 0;
             position: relative;
             overflow: hidden;
             width: 100%;
@@ -37,7 +59,7 @@
             margin: 0;
         }
 
-        /* Animated background */
+        /* Animated Education Background */
         body::before {
             content: '';
             position: absolute;
@@ -45,11 +67,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(26, 95, 122, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(232, 185, 35, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(26, 95, 122, 0.03) 0%, transparent 60%);
             z-index: 0;
+        }
+
+        /* Floating Education Icons */
+        .floating-icon {
+            position: absolute;
+            color: rgba(26, 95, 122, 0.08);
+            font-size: 24px;
+            animation: float 6s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; font-size: 28px; }
+        .floating-icon:nth-child(2) { top: 25%; right: 10%; animation-delay: 1s; font-size: 20px; }
+        .floating-icon:nth-child(3) { bottom: 20%; left: 12%; animation-delay: 2s; font-size: 32px; }
+        .floating-icon:nth-child(4) { bottom: 35%; right: 8%; animation-delay: 1.5s; font-size: 22px; }
+        .floating-icon:nth-child(5) { top: 60%; left: 5%; animation-delay: 2.5s; font-size: 26px; }
+        .floating-icon:nth-child(6) { top: 15%; left: 45%; animation-delay: 3s; font-size: 18px; }
+        .floating-icon:nth-child(7) { bottom: 10%; right: 25%; animation-delay: 0.5s; font-size: 30px; }
+        .floating-icon:nth-child(8) { top: 45%; right: 5%; animation-delay: 3.5s; font-size: 24px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
         .app-container {
@@ -62,145 +108,168 @@
             margin: 0 auto;
         }
 
-        /* Login Screen */
+        /* ========== LOGIN SCREEN ========== */
         .login-screen {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
             height: 100%;
             display: flex;
             flex-direction: column;
-            animation: zoomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: zoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
         }
 
         @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.85) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .login-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 45px 30px 60px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
+        /* Decorative wave */
+        .login-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: var(--white);
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+
+        /* Header pattern */
         .login-header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 25%);
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .logo-section {
+            position: relative;
+            z-index: 1;
         }
 
-        .logo-circle {
-            width: 90px;
-            height: 90px;
-            background: white;
+        .logo-badge {
+            width: 100px;
+            height: 100px;
+            background: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 0 4px rgba(255,255,255,0.2);
             position: relative;
-            z-index: 1;
-            padding: 8px;
+            padding: 12px;
             transition: transform 0.3s ease;
         }
 
-        .logo-circle:hover {
-            transform: scale(1.05);
+        .logo-badge:hover {
+            transform: scale(1.05) rotate(3deg);
         }
 
-        .logo-circle img {
+        .logo-badge img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        .logo-circle i {
-            font-size: 45px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .logo-badge i {
+            font-size: 48px;
+            color: var(--primary);
+        }
+
+        /* Decorative ring around logo */
+        .logo-ring {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .school-title {
-            color: white;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
             position: relative;
             z-index: 1;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: -0.5px;
         }
 
         .portal-subtitle {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
             font-weight: 500;
             position: relative;
             z-index: 1;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
         }
 
         .login-form {
-            padding: 35px 30px;
+            padding: 0 28px 35px;
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(248,249,250,0.5));
             position: relative;
-        }
-
-        /* New decorative elements for login form */
-        .login-form::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: white;
-            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            background: var(--white);
         }
 
         .login-form-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: var(--bg-cream);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.04);
             position: relative;
             z-index: 1;
-            margin-top: 10px;
+            margin-top: -10px;
         }
 
         .login-title {
             text-align: center;
-            margin-bottom: 25px;
-            color: #1f2937;
-            font-size: 20px;
+            margin-bottom: 28px;
+            color: var(--text-dark);
+            font-size: 18px;
             font-weight: 700;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-title i {
+            color: var(--secondary);
+            font-size: 20px;
         }
 
         .login-title::after {
@@ -209,28 +278,59 @@
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 50px;
             height: 3px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             border-radius: 3px;
         }
 
         .input-group-custom {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
         }
 
         .input-label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 10px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
             transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .input-label i {
+            color: var(--primary-light);
+            font-size: 14px;
         }
 
         .input-wrapper {
             position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            border: 2px solid #e8e4dc;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .input-field::placeholder {
+            color: #b8b4ac;
+            font-size: 14px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(26, 95, 122, 0.08), 0 4px 12px rgba(26, 95, 122, 0.1);
         }
 
         .input-icon {
@@ -238,145 +338,125 @@
             left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: #9ca3af;
+            color: #b8b4ac;
             font-size: 18px;
             transition: all 0.3s ease;
             z-index: 2;
         }
 
-        .input-field {
-            width: 100%;
-            padding: 15px 15px 15px 48px;
-            border: 2px solid #e5e7eb;
-            border-radius: 14px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 1;
+        .input-field:focus ~ .input-icon {
+            color: var(--primary);
         }
 
-        .input-field:focus {
-            outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), 0 10px 25px rgba(102, 126, 234, 0.15);
-        }
-
-        .input-field:focus + .input-icon {
-            color: #667eea;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        /* Floating label effect */
         .input-group-custom.focused .input-label {
-            color: #667eea;
-            transform: translateY(-2px);
+            color: var(--primary);
+        }
+
+        /* Password toggle */
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #b8b4ac;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 2;
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
             border: none;
-            border-radius: 14px;
+            border-radius: var(--radius-sm);
             padding: 16px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 15px;
+            margin-top: 10px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
         }
 
         .btn-submit::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
 
         .btn-submit:hover::before {
-            opacity: 1;
+            left: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(26, 95, 122, 0.4);
         }
 
         .btn-submit:active {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-submit::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
-        }
-
-        .btn-submit:active::after {
-            width: 400px;
-            height: 400px;
+            transform: translateY(0);
         }
 
         .spinner {
             display: none;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: var(--white);
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
+            animation: spinAnim 0.8s linear infinite;
         }
 
-        @keyframes spin {
+        @keyframes spinAnim {
             to { transform: rotate(360deg); }
         }
 
-        /* New decorative elements */
-        .login-decoration {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            filter: blur(40px);
-            z-index: 0;
+        .login-footer {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 20px;
         }
 
-        .decoration-1 {
-            top: -50px;
-            right: -50px;
+        .login-footer-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
-        .decoration-2 {
-            bottom: -50px;
-            left: -50px;
+        .login-footer-text i {
+            color: var(--secondary);
         }
 
-        /* Dashboard Screen */
+        /* ========== DASHBOARD SCREEN ========== */
         .dashboard-screen {
             display: none;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            background: var(--bg-cream);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
             height: 100%;
             flex-direction: column;
@@ -384,20 +464,51 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .dashboard-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px 25px 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 30px 25px 55px;
             position: relative;
+        }
+
+        .dashboard-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: var(--bg-cream);
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            color: var(--white);
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-badge i {
+            font-size: 12px;
         }
 
         .welcome-section {
@@ -409,61 +520,139 @@
         }
 
         .avatar {
-            width: 55px;
-            height: 55px;
-            background: white;
+            width: 58px;
+            height: 58px;
+            background: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            font-weight: 700;
-            color: #667eea;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 800;
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            position: relative;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .avatar-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: var(--success);
+            border: 2px solid var(--white);
+            border-radius: 50%;
         }
 
         .welcome-text {
-            color: white;
+            color: var(--white);
         }
 
         .welcome-greet {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 4px;
+            font-size: 13px;
+            opacity: 0.85;
+            margin-bottom: 3px;
+            font-weight: 400;
         }
 
         .welcome-name {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         .dashboard-content {
-            margin-top: -30px;
-            padding: 25px 20px 25px;
+            margin-top: -25px;
+            padding: 0 20px 20px;
             flex: 1;
             overflow-y: auto;
-            background: #f8f9fa;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 14px 8px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 16px;
+        }
+
+        .stat-icon.blue { background: rgba(26, 95, 122, 0.1); color: var(--primary); }
+        .stat-icon.gold { background: rgba(232, 185, 35, 0.15); color: #c4950c; }
+        .stat-icon.green { background: rgba(39, 174, 96, 0.1); color: var(--success); }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Menu Section */
         .menu-section {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.03);
+            margin-bottom: 16px;
         }
 
         .section-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 15px;
+            color: var(--text-dark);
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .section-title i {
-            color: #667eea;
+            color: var(--secondary);
+            font-size: 18px;
+        }
+
+        .section-title span {
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: auto;
         }
 
         .menu-items {
@@ -472,21 +661,40 @@
         }
 
         .menu-item {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            border: 2px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 18px;
+            background: var(--bg-cream);
+            border: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            padding: 16px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+            border-radius: 0 4px 4px 0;
+            transform: scaleY(0);
+            transition: transform 0.3s;
         }
 
         .menu-item:hover {
-            transform: translateX(5px);
-            border-color: #667eea;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transform: translateX(4px);
+            border-color: rgba(26, 95, 122, 0.1);
+            box-shadow: var(--shadow-md);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
         }
 
         .menu-item:active {
@@ -494,85 +702,136 @@
         }
 
         .menu-icon-box {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            color: white;
+            font-size: 22px;
+            color: var(--white);
             flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .menu-item:nth-child(1) .menu-icon-box {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .menu-icon-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
         }
 
-        .menu-item:nth-child(2) .menu-icon-box {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-        }
-
-        .menu-item:nth-child(3) .menu-icon-box {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-        }
-         .menu-item:nth-child(4) .menu-icon-box {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
-}
+        .menu-item:nth-child(1) .menu-icon-box { background: linear-gradient(135deg, #1a5f7a, #2a8faf); }
+        .menu-item:nth-child(2) .menu-icon-box { background: linear-gradient(135deg, #e8b923, #f5d76e); color: #5c4a0a; }
+        .menu-item:nth-child(3) .menu-icon-box { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .menu-item:nth-child(4) .menu-icon-box { background: linear-gradient(135deg, #e74c3c, #ec7063); }
 
         .menu-details {
             flex: 1;
+            min-width: 0;
         }
 
         .menu-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
         }
 
         .menu-description {
-            font-size: 13px;
-            color: #6b7280;
+            font-size: 12px;
+            color: var(--text-muted);
             line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .menu-arrow {
-            color: #9ca3af;
+            color: #d1cdc5;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .menu-item:hover .menu-arrow {
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        /* Info Card */
+        .info-card {
+            background: linear-gradient(135deg, rgba(26, 95, 122, 0.05), rgba(232, 185, 35, 0.05));
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px dashed rgba(26, 95, 122, 0.15);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-card i {
+            color: var(--secondary);
             font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .info-card-content {
+            flex: 1;
+        }
+
+        .info-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+
+        .info-card-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
 
         .logout-section {
-            margin-top: 20px;
-            text-align: center;
+            margin-top: 8px;
         }
 
         .btn-logout {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            padding: 14px 30px;
-            font-size: 15px;
-            font-weight: 700;
+            width: 100%;
+            background: var(--white);
+            color: var(--accent);
+            border: 2px solid rgba(231, 76, 60, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
 
         .btn-logout:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+            background: var(--accent);
+            color: var(--white);
+            border-color: var(--accent);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.25);
         }
 
-        /* App View */
+        /* ========== APP SCREEN ========== */
         .app-screen {
             display: none;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            background: var(--bg-cream);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
             height: 100%;
             flex-direction: column;
@@ -580,54 +839,63 @@
         }
 
         @keyframes slideLeft {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .app-topbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 18px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
+        }
+
+        .app-topbar::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: var(--bg-cream);
+            clip-path: ellipse(60% 100% at 50% 100%);
         }
 
         .btn-back {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255,255,255,0.15);
             border: none;
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
-            color: white;
-            font-size: 20px;
+            color: var(--white);
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
         }
 
         .btn-back:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: translateX(-4px);
+            background: rgba(255,255,255,0.25);
+            transform: translateX(-3px);
         }
 
         .app-name {
-            color: white;
-            font-size: 18px;
+            color: var(--white);
+            font-size: 16px;
             font-weight: 700;
         }
 
         .app-container-view {
             flex: 1;
             position: relative;
-            background: #f8f9fa;
+            background: var(--bg-cream);
+            margin-top: -10px;
+            z-index: 1;
         }
 
         .app-frame {
@@ -645,22 +913,22 @@
         }
 
         .loader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #e5e7eb;
-            border-top-color: #667eea;
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e8e4dc;
+            border-top-color: var(--primary);
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: spinAnim 0.8s linear infinite;
             margin: 0 auto 15px;
         }
 
         .loader-text {
-            color: #6b7280;
-            font-size: 15px;
+            color: var(--text-muted);
+            font-size: 14px;
             font-weight: 600;
         }
 
-        /* Toast Notification */
+        /* ========== TOAST ========== */
         .toast-area {
             position: fixed;
             top: 25px;
@@ -669,54 +937,50 @@
         }
 
         .toast-msg {
-            background: white;
-            border-radius: 16px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
             padding: 16px 20px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-lg);
             display: flex;
             align-items: center;
             gap: 12px;
-            min-width: 280px;
+            min-width: 300px;
             animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         @keyframes toastIn {
-            from {
-                opacity: 0;
-                transform: translateX(100%) scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0) scale(1);
-            }
+            from { opacity: 0; transform: translateX(100%) scale(0.8); }
+            to { opacity: 1; transform: translateX(0) scale(1); }
         }
 
         .toast-success {
-            border-left: 5px solid #10b981;
+            border-left: 4px solid var(--success);
         }
 
         .toast-error {
-            border-left: 5px solid #ef4444;
+            border-left: 4px solid var(--accent);
         }
 
         .toast-icon-circle {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 18px;
+            flex-shrink: 0;
         }
 
         .toast-success .toast-icon-circle {
-            background: #d1fae5;
-            color: #10b981;
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success);
         }
 
         .toast-error .toast-icon-circle {
-            background: #fee2e2;
-            color: #ef4444;
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--accent);
         }
 
         .toast-content {
@@ -724,89 +988,136 @@
         }
 
         .toast-title {
-            font-weight: 700;
+            font-weight: 600;
             font-size: 14px;
-            color: #1f2937;
+            color: var(--text-dark);
         }
 
-        /* Mobile adjustments */
+        /* ========== MOBILE ========== */
         @media (max-width: 480px) {
-            body {
-                padding: 5px;
-            }
-            
             .app-container {
                 max-width: 100%;
             }
-            
+
+            .login-header {
+                padding: 35px 20px 50px;
+            }
+
             .login-form {
-                padding: 25px 20px;
+                padding: 0 20px 25px;
             }
-            
+
+            .login-form-container {
+                padding: 22px;
+            }
+
             .dashboard-content {
-                padding: 20px 15px;
+                padding: 0 15px 15px;
             }
-            
+
             .menu-item {
-                padding: 15px;
+                padding: 14px;
             }
-            
+
             .menu-icon-box {
-                width: 45px;
-                height: 45px;
-                font-size: 22px;
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
             }
-            
+
             .menu-name {
-                font-size: 15px;
+                font-size: 14px;
             }
-            
+
             .menu-description {
-                font-size: 12px;
+                font-size: 11px;
+            }
+
+            .quick-stats {
+                gap: 8px;
+            }
+
+            .stat-card {
+                padding: 12px 6px;
+            }
+
+            .stat-value {
+                font-size: 14px;
             }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
+    <!-- Floating Education Icons -->
+    <i class="bi bi-book-half floating-icon"></i>
+    <i class="bi bi-mortarboard-fill floating-icon"></i>
+    <i class="bi bi-pencil-fill floating-icon"></i>
+    <i class="bi bi-journal-bookmark-fill floating-icon"></i>
+    <i class="bi bi-globe-americas floating-icon"></i>
+    <i class="bi bi-lightbulb-fill floating-icon"></i>
+    <i class="bi bi-award-fill floating-icon"></i>
+    <i class="bi bi-calculator floating-icon"></i>
+
     <div class="app-container">
         <!-- Login Screen -->
         <div id="loginScreen" class="login-screen">
             <div class="login-header">
-                <div class="logo-circle">
-                    <!-- Ganti URL di bawah dengan link logo sekolah Anda -->
-                    <img src="logo-sekolah.png" alt="Logo SDN 2 Karangmangu" id="schoolLogo">
-                    <!-- Atau bisa tetap pakai icon jika tidak ada gambar -->
-                    <!-- <i class="bi bi-building"></i> -->
+                <div class="logo-section">
+                    <div class="logo-badge">
+                        <div class="logo-ring"></div>
+                        <img src="logo-sekolah.png" alt="Logo SDN 2 Karangmangu" id="schoolLogo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <i class="bi bi-building" style="display:none;"></i>
+                    </div>
+                    <div class="school-title">SDN 2 Karangmangu</div>
+                    <div class="portal-subtitle">
+                        <i class="bi bi-shield-check"></i>
+                        Portal Wali Murid
+                    </div>
                 </div>
-                <div class="school-title">SDN 2 Karangmangu</div>
-                <div class="portal-subtitle">Portal Wali Murid</div>
             </div>
             <form class="login-form" id="loginForm">
-                <!-- Decorative elements -->
-                <div class="login-decoration decoration-1"></div>
-                <div class="login-decoration decoration-2"></div>
-                
                 <div class="login-form-container">
-                    <h2 class="login-title">Masuk ke Portal</h2>
-                    
+                    <h2 class="login-title">
+                        <i class="bi bi-door-open-fill"></i>
+                        Masuk ke Portal
+                    </h2>
+
                     <div class="input-group-custom">
-                        <label class="input-label">Username</label>
+                        <label class="input-label">
+                            <i class="bi bi-person-circle"></i>
+                            Username
+                        </label>
                         <div class="input-wrapper">
-                            <input type="text" class="input-field" id="username" placeholder="Masukkan username Anda" required>
+                            <input type="text" class="input-field" id="username" placeholder="Masukkan username Anda" required autocomplete="username">
                             <i class="bi bi-person-fill input-icon"></i>
                         </div>
                     </div>
                     <div class="input-group-custom">
-                        <label class="input-label">Password</label>
+                        <label class="input-label">
+                            <i class="bi bi-shield-lock"></i>
+                            Password
+                        </label>
                         <div class="input-wrapper">
-                            <input type="password" class="input-field" id="password" placeholder="Masukkan password Anda" required>
+                            <input type="password" class="input-field" id="password" placeholder="Masukkan password Anda" required autocomplete="current-password">
                             <i class="bi bi-lock-fill input-icon"></i>
+                            <button type="button" class="password-toggle" onclick="togglePassword()">
+                                <i class="bi bi-eye-slash" id="toggleIcon"></i>
+                            </button>
                         </div>
                     </div>
                     <button type="submit" class="btn-submit">
                         <span id="btnText">Masuk ke Portal</span>
+                        <i class="bi bi-arrow-right-circle-fill" id="btnIcon" style="font-size:18px;"></i>
                         <div class="spinner" id="spinner"></div>
                     </button>
+                </div>
+
+                <div class="login-footer">
+                    <div class="login-footer-text">
+                        <i class="bi bi-shield-check"></i>
+                        Sistem Informasi Sekolah Terintegrasi
+                    </div>
                 </div>
             </form>
         </div>
@@ -814,19 +1125,61 @@
         <!-- Dashboard Screen -->
         <div id="dashboardScreen" class="dashboard-screen">
             <div class="dashboard-header">
+                <div class="header-top">
+                    <div class="header-badge">
+                        <i class="bi bi-building"></i>
+                        SDN 2 Karangmangu
+                    </div>
+                    <div class="header-badge">
+                        <i class="bi bi-circle-fill" style="font-size:8px; color:#27ae60;"></i>
+                        Online
+                    </div>
+                </div>
                 <div class="welcome-section">
-                    <div class="avatar" id="userAvatar">W</div>
+                    <div class="avatar" id="userAvatar">W
+                        <div class="avatar-status"></div>
+                    </div>
                     <div class="welcome-text">
-                        <div class="welcome-greet">Selamat datang,</div>
+                        <div class="welcome-greet">Selamat datang kembali,</div>
                         <div class="welcome-name" id="userName">Wali Murid</div>
                     </div>
                 </div>
             </div>
             <div class="dashboard-content">
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="bi bi-calendar-check"></i></div>
+                        <div class="stat-value" id="statHadir">98%</div>
+                        <div class="stat-label">Kehadiran</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold"><i class="bi bi-trophy"></i></div>
+                        <div class="stat-value" id="statNilai">85</div>
+                        <div class="stat-label">Rata-rata</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="bi bi-star-fill"></i></div>
+                        <div class="stat-value" id="statRank">5</div>
+                        <div class="stat-label">Peringkat</div>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="info-card">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <div class="info-card-content">
+                        <div class="info-card-title">Informasi Penting</div>
+                        <div class="info-card-text">Pastikan data anak Anda selalu terupdate. Hubungi pihak sekolah jika ada perubahan data.</div>
+                    </div>
+                </div>
+
+                <!-- Menu Section -->
                 <div class="menu-section">
                     <div class="section-title">
                         <i class="bi bi-grid-3x3-gap-fill"></i>
                         Menu Utama
+                        <span>4 Fitur</span>
                     </div>
                     <div class="menu-items">
                         <div class="menu-item" onclick="openApplication('monitoring-siswa', 'Monitoring Siswa')">
@@ -835,7 +1188,7 @@
                             </div>
                             <div class="menu-details">
                                 <div class="menu-name">Monitoring Siswa</div>
-                                <div class="menu-description">Pantau kehadiran dan aktivitas harian</div>
+                                <div class="menu-description">Pantau kehadiran dan aktivitas harian anak</div>
                             </div>
                             <i class="bi bi-chevron-right menu-arrow"></i>
                         </div>
@@ -845,32 +1198,33 @@
                             </div>
                             <div class="menu-details">
                                 <div class="menu-name">Monitoring Nilai Per Mapel</div>
-                                <div class="menu-description">Lihat nilai Per Mapel</div>
+                                <div class="menu-description">Lihat nilai per mata pelajaran</div>
                             </div>
                             <i class="bi bi-chevron-right menu-arrow"></i>
                         </div>
-                        <div class="menu-item" onclick="openApplication('monitor-rekap', 'Monitor rekap')">
+                        <div class="menu-item" onclick="openApplication('monitor-rekap', 'Monitor Rekap')">
                             <div class="menu-icon-box">
                                 <i class="bi bi-file-earmark-text-fill"></i>
                             </div>
                             <div class="menu-details">
                                 <div class="menu-name">Monitoring Rekapitulasi Nilai</div>
-                                <div class="menu-description">Lihat Rata2 dan Total Nilai semua mapel</div>
+                                <div class="menu-description">Lihat rata-rata dan total nilai semua mapel</div>
                             </div>
                             <i class="bi bi-chevron-right menu-arrow"></i>
                         </div>
-                         <div class="menu-item" onclick="openApplication('chat', 'Chat')">
+                        <div class="menu-item" onclick="openApplication('chat', 'Media Sosial Sekolah')">
                             <div class="menu-icon-box">
                                 <i class="bi bi-chat-dots-fill"></i>
                             </div>
                             <div class="menu-details">
                                 <div class="menu-name">Media Sosial Sekolah</div>
-                                <div class="menu-description">Dapatkan informasi, coment dan Chat</div>
+                                <div class="menu-description">Dapatkan informasi, komentar, dan chat</div>
                             </div>
                             <i class="bi bi-chevron-right menu-arrow"></i>
                         </div>
                     </div>
                 </div>
+
                 <div class="logout-section">
                     <button class="btn-logout" onclick="handleLogout()">
                         <i class="bi bi-box-arrow-right"></i>
@@ -907,7 +1261,6 @@
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
 
-        // Fix viewport for mobile devices
         if (isMobile()) {
             const viewport = document.querySelector('meta[name="viewport"]');
             if (viewport) {
@@ -929,9 +1282,9 @@
             'wali1': { password: '123456', name: 'Wali Murid Kelas 1' },
             'wali2': { password: '123456', name: 'Wali Murid Kelas 2' },
             'wali3a': { password: '123456', name: 'Wali Murid Kelas 3A' },
-            'wali3b': { password: '123456', name: 'Wali Murid Kelas 3b' },
-            'wali4a': { password: '123456', name: 'Wali Murid Kelas 4a' },
-            'wali4b': { password: '123456', name: 'Wali Murid Kelas 4b' },
+            'wali3b': { password: '123456', name: 'Wali Murid Kelas 3B' },
+            'wali4a': { password: '123456', name: 'Wali Murid Kelas 4A' },
+            'wali4b': { password: '123456', name: 'Wali Murid Kelas 4B' },
             'wali5': { password: '123456', name: 'Wali Murid Kelas 5' },
             'wali6': { password: '123456', name: 'Wali Murid Kelas 6' },
             'admin': { password: 'admin123', name: 'Administrator' }
@@ -952,6 +1305,7 @@
             username: document.getElementById('username'),
             password: document.getElementById('password'),
             btnText: document.getElementById('btnText'),
+            btnIcon: document.getElementById('btnIcon'),
             spinner: document.getElementById('spinner'),
             userName: document.getElementById('userName'),
             userAvatar: document.getElementById('userAvatar'),
@@ -960,12 +1314,25 @@
             appFrame: document.getElementById('appFrame')
         };
 
+        // Toggle password visibility
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('toggleIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'bi bi-eye';
+            } else {
+                input.type = 'password';
+                icon.className = 'bi bi-eye-slash';
+            }
+        }
+
         // Add focus effects to input fields
         document.querySelectorAll('.input-field').forEach(input => {
             input.addEventListener('focus', function() {
                 this.parentElement.parentElement.classList.add('focused');
             });
-            
+
             input.addEventListener('blur', function() {
                 if (!this.value) {
                     this.parentElement.parentElement.classList.remove('focused');
@@ -975,29 +1342,31 @@
 
         elements.loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const user = elements.username.value.trim();
             const pass = elements.password.value;
-            
+
             elements.btnText.style.display = 'none';
+            elements.btnIcon.style.display = 'none';
             elements.spinner.style.display = 'block';
-            
+
             await new Promise(r => setTimeout(r, 600));
-            
+
             if (users[user] && users[user].password === pass) {
-                showToast('Login berhasil!', 'success');
+                showToast('Login berhasil! Selamat datang kembali.', 'success');
                 setTimeout(() => showDashboard(users[user].name), 300);
             } else {
                 showToast('Username atau password salah!', 'error');
                 elements.btnText.style.display = 'inline';
+                elements.btnIcon.style.display = 'inline-block';
                 elements.spinner.style.display = 'none';
             }
         });
 
         function showDashboard(name) {
             elements.userName.textContent = name;
-            elements.userAvatar.textContent = name.charAt(0).toUpperCase();
-            
+            elements.userAvatar.childNodes[0].textContent = name.charAt(0).toUpperCase();
+
             elements.loginScreen.style.display = 'none';
             elements.dashboardScreen.style.display = 'flex';
             elements.appScreen.style.display = 'none';
@@ -1026,27 +1395,27 @@
         function handleLogout() {
             elements.loginForm.reset();
             elements.btnText.style.display = 'inline';
+            elements.btnIcon.style.display = 'inline-block';
             elements.spinner.style.display = 'none';
             elements.appFrame.src = 'about:blank';
-            
-            // Remove focus class from inputs
+
             document.querySelectorAll('.input-group-custom').forEach(group => {
                 group.classList.remove('focused');
             });
-            
+
             elements.loginScreen.style.display = 'flex';
             elements.dashboardScreen.style.display = 'none';
             elements.appScreen.style.display = 'none';
-            
+
             showToast('Berhasil keluar dari portal', 'success');
         }
 
         function showToast(message, type) {
             const toast = document.createElement('div');
             toast.className = `toast-msg toast-${type}`;
-            
+
             const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-x-circle-fill';
-            
+
             toast.innerHTML = `
                 <div class="toast-icon-circle">
                     <i class="bi ${icon}"></i>
@@ -1055,13 +1424,13 @@
                     <div class="toast-title">${message}</div>
                 </div>
             `;
-            
+
             document.getElementById('toastArea').appendChild(toast);
-            
+
             setTimeout(() => {
                 toast.style.animation = 'toastIn 0.3s ease-out reverse';
                 setTimeout(() => toast.remove(), 300);
-            }, 2800);
+            }, 3000);
         }
 
         window.addEventListener('popstate', () => {
@@ -1072,18 +1441,17 @@
         });
     </script>
     <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          console.log('ServiceWorker registration successful');
-        })
-        .catch(error => {
-          console.log('ServiceWorker registration failed: ', error);
-        });
-    });
-  }
-</script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
 </body>
-
 </html>
